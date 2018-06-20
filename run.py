@@ -17,7 +17,7 @@ np.random.seed(171103)
 os.environ['TF_CPP_MIN_LOG_LEVEL']='3'
 
 @logger.run_time
-def run(dataset, maxlen = 100, **kwargs):
+def run(dataset, maxlen = 50, **kwargs):
     data = kerasData(dataset = dataset, maxlen = maxlen)
     log('dataset: {}, maxlen: {}, gpu: {}'.format(
         dataset,
@@ -55,7 +55,7 @@ def get_args():
     args['mem_text_l2'] = 0
     args['mem_text_pos_l2'] = 1e-3
 
-    args['nb_mem_layers'] = 2
+    args['nb_mem_layers'] = 1
     return args
 
 @logger.run_time
@@ -70,9 +70,9 @@ def main():
     add_argument('-gpu', type = str, default = '3')
     add_argument('-rt', '--run_times', type = int, default = 1)
     add_argument('-es', '--early_stop', type = int, default = 5)
-    add_argument('-k', '--dim_k', type = int, default = 128)
+    add_argument('-k', '--dim_k', type = int, default = 64)
     add_argument('-bsteps', '--batch_steps', type = int, default = -1)
-    add_argument('-bsize', '--batch_size', type = int, default = 128)
+    add_argument('-bsize', '--batch_size', type = int, default = 64)
     add_argument('-me', '--max_epochs', type = int, default = 200)
 
     args = parser.parse_args()

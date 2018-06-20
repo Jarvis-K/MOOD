@@ -14,7 +14,7 @@ class Data:
         self.y = y
 
 class BasicData:
-    def __init__(self, dataset, maxlen = 100):
+    def __init__(self, dataset, maxlen = 50):
         self.ds = dataset
         self.maxlen = maxlen
         fn = 'data/{}.json'.format(dataset)

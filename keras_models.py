@@ -108,7 +108,7 @@ class BasicModel:
                     idx = next(idxs)
                     self.model.train_on_batch([_x[idx] for _x in x], y[idx])
             else:
-                self.model.fit(x, y, batch_size = batch_size, epochs = 1, verbose = 0)
+                self.model.fit(x, y, batch_size = batch_size, epochs = 1,verbose = 0)
             yield 1
 
     def _fit(self):
@@ -200,6 +200,7 @@ class BasicModel:
         self.make_inputs()
         x = self.post_emb()
         x = self.top_layers(x)
+        # x = self.top_layers(x)
         y = Dense(
                 1,
                 activation = 'relu',
