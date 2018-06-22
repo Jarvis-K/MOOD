@@ -49,6 +49,8 @@ def get_args():
     args['pair_loc_l2'] = 1e-4
     args['bias_user_l2'] = 0
     args['bias_loc_l2'] = 1e-2
+    args['bias_fol_l2'] = 0
+    args['bias_sta_l2'] = 1e-2
 
     args['att_text_l2'] = 1e-4
     args['att_text_pos_l2'] = 1e-3

@@ -6,8 +6,8 @@
     "nb_train": 5287,
     "nb_words": 12882,
     "nb_users": 134,
-    "nb_follows": 80,
-    "nb_status": 80,
+    "nb_fols": 80,
+    "nb_stas": 80,
     "test": {
         "label": [
             2,

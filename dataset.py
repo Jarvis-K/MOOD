@@ -14,7 +14,7 @@ class Data:
         self.y = y
 
 class BasicData:
-    def __init__(self, dataset, maxlen = 50):
+    def __init__(self, dataset, maxlen = 64):
         self.ds = dataset
         self.maxlen = maxlen
         fn = 'data/{}.json'.format(dataset)
@@ -51,13 +51,14 @@ class kerasData(BasicData):
     def get_x(self, data):
         user = np.array(data['user']).reshape((-1, 1))
         loc = np.array(data['location']).reshape((-1, 1))
+        fol=np.array(data['follow']).reshape((-1, 1))
+        sta=np.array(data['status']).reshape((-1, 1))
         texts = data['text']
         text = self.pad_text(texts)
-        return [user, loc, text]
+        return [user, loc, fol,sta,text]
 
 def main():
     print('hello world, dataset')
 
 if __name__ == '__main__':
     main()
-

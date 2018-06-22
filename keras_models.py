@@ -21,7 +21,7 @@ from keras.layers import Bidirectional
 from keras.layers import concatenate
 from keras.layers import add
 from keras.layers import multiply
-
+from keras.utils import plot_model
 from keras.models import Model
 from keras import regularizers
 from keras import optimizers
@@ -175,19 +175,30 @@ class BasicModel:
     def loc_emb(self, name = 'loc'):
         return self.single_embedding(self.inp_loc, self.data.nb_locs, name)
 
+    def fol_emb(self, name = 'fol'):
+        return self.single_embedding(self.inp_fol, self.data.nb_fols+1, name)
+
+    def sta_emb(self, name = 'sta'):
+        return self.single_embedding(self.inp_sta, self.data.nb_stas+1, name)
+
     def post_emb(self):
         pass
 
     def make_inputs(self):
         self.inp_user = Input((1,), name = 'inp_user')
         self.inp_loc = Input((1,), name = 'inp_loc')
+        self.inp_fol=Input((1,), name = 'inp_fol')
+        self.inp_sta=Input((1,), name = 'inp_sta')
         self.inp_text = Input((self.maxlen,), name = 'inp_text')
-        self.inputs = [self.inp_user, self.inp_loc, self.inp_text]
+
+        self.inputs = [self.inp_user, self.inp_loc,self.inp_fol,self.inp_sta, self.inp_text]
 
     def top_layers(self, x):
         user = self.user_emb('bias_user')
         loc = self.loc_emb('bias_loc')
-        x = concatenate([x, user, loc])
+        fol=self.fol_emb('bias_fol')
+        sta=self.sta_emb('bias_sta')
+        x = concatenate([x, user,loc,fol,sta])
         x = Dense(
                 512,
                 activation = 'relu',
@@ -201,6 +212,16 @@ class BasicModel:
         x = self.post_emb()
         x = self.top_layers(x)
         # x = self.top_layers(x)
+        x = Dense(
+                128,
+                activation = 'relu',
+                kernel_regularizer = self.get_l2('dense'),
+                bias_regularizer = self.get_l2('dense_b')
+                )(x)
+
+        # print('x shape',x.shape)
+        # x = self.top_layers(x)
+        # x = self.top_layers(x)
         y = Dense(
                 1,
                 activation = 'relu',
@@ -211,6 +232,8 @@ class BasicModel:
         model.compile(
                 optimizer = 'adagrad',
                 loss = 'mse')
+        plot_model(model,to_file='model.png',show_shapes=True)
+        plot_model(model,to_file='model_noshape.png',show_shapes=False)
         return model
 
 class MemNN(BasicModel):
@@ -228,6 +251,8 @@ class MemNN(BasicModel):
     def post_emb(self):
         user = self.user_emb('att_user')
         loc = self.loc_emb('att_loc')
+        # fol=self.fol_emb('bias_fol')
+        # sta=self.sta_emb('bias_sta')
         mem = self.text_embs(name = 'mem_text')
         att = self.text_embs(name = 'att_text')
         return self.mem(mem, att, user, loc)
@@ -237,10 +262,25 @@ class MOOD(MemNN):
         text = super().post_emb()
         user = self.user_emb('pair_user')
         loc = self.loc_emb('pair_loc')
+
+        fol=self.fol_emb('bias_fol')
+        sta=self.sta_emb('bias_sta')
+
         ut = multiply([user, text])
         lt = multiply([loc, text])
         ul = multiply([user, loc])
-        return add([ut, lt, ul])
+
+        fu= multiply([user, fol])
+        fl=multiply([fol, loc])
+        ft=multiply([fol, text])
+
+        su= multiply([user, sta])
+        sl=multiply([sta, loc])
+        st=multiply([sta, text])
+
+        fs=multiply([sta,fol])
+        # su=multiply([user, sta])
+        return add([ut, lt, ul,ft,st])
 
 
 def main():
