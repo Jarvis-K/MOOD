@@ -1,13 +1,5 @@
-# MOOD
-- A deep learning model for popularity prediction
-
-## Support
-- Python version: 3.5.2
-- Keras version: 2.0.4
-- tensorflow version: 1.1.0
-- numpy version: 1.12.1
-
-## Dataset
-- shanghai.json
-- beijing.json
-- Two datasets are uploaded to https://drive.google.com/drive/folders/0B1_loAG4-q_3bVNSbjdNQXkyWkU?usp=sharing
+# 目录结构
+* 核心代码见当前目录
+* 报告与ppt见`./report/`
+* 预处理代码见`./preprocessing/`
+* 最终结果见`./tweet_test_labeled.json`
