@@ -74,6 +74,7 @@ class BasicModel:
             te.append(_te)
             msg = 'vali: {}, test: {}'.format(_ve, _te)
             log(msg)
+
         return Eva.mean(ve), Eva.mean(te)
 
     def predict(self, x):
@@ -111,6 +112,15 @@ class BasicModel:
                 self.model.fit(x, y, batch_size = batch_size, epochs = 1,verbose = 0)
             yield 1
 
+    def produceResult(self,x):
+        x=eval('self.data.test')
+        x=x.x
+        y=self.predict(x)
+        print(y)
+        with open('pred.txt','w') as f:
+            for item in y:
+                f.write(str(item[0])+'\n')
+
     def _fit(self):
         best_weights, best_e, brk = None, None, 0
         training = self.train_on_batch(self.data.train, self.batch_size, self.batch_steps)
@@ -133,9 +143,13 @@ class BasicModel:
                 break
         _timer.start()
         self.model.set_weights(best_w)
-        test_e = self.evaluate('test')
+        # self.model.save('my_model.h5')  
+        # test_e = self.evaluate('test')
+        self.produceResult('test')
+        test_e=best_e
         _timer.stop()
         return best_e, test_e
+
 
     def single_embedding(self, x, n, name, dim_k = None):
         if dim_k is None:
@@ -198,7 +212,8 @@ class BasicModel:
         loc = self.loc_emb('bias_loc')
         fol=self.fol_emb('bias_fol')
         sta=self.sta_emb('bias_sta')
-        x = concatenate([x, user,loc,fol,sta])
+        x = concatenate([x, user,loc])
+        # x = concatenate([x, user,loc,fol,sta])
         x = Dense(
                 512,
                 activation = 'relu',
@@ -280,7 +295,8 @@ class MOOD(MemNN):
 
         fs=multiply([sta,fol])
         # su=multiply([user, sta])
-        return add([ut, lt, ul,ft,st])
+        return add([ut, lt, ul])
+        # return add([ut, lt, ul,ft,st])
 
 
 def main():

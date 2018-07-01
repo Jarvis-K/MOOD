@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.9.3)  21 JUN 2018 22:42
+This is XeTeX, Version 3.14159265-2.6-0.99998 (TeX Live 2017) (preloaded format=xelatex 2017.9.3)  1 JUL 2018 16:46
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1552,29 +1552,26 @@ Overfull \vbox (14.45377pt too high) has occurred while \output is active []
  [6]
 File: tweet_pics/graph.png Graphic file (type QTm)
  <use  "tweet_pics/graph.png" >
-Overfull \hbox (0.91301pt too wide) in paragraph at lines 178--181
-[]\TU/lmr/m/n/12 cc[]  
+Overfull \hbox (65.31302pt too wide) in paragraph at lines 181--184
+[]\TU/STSong(0)/m/n/12 最 终 我 们 通 过 这 个 模 型 对 于 \TU/lmr/m/n/12 ublable \TU/STSong(0)/m/n/12 的 数 据 进 行 预 测，|  并 将 最 终 结 果 输 出 到 \TU/lmr/m/n/12 tweet_test_labeled.json
  []
 
-
-LaTeX Warning: Empty `thebibliography' environment on input line 184.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 186.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
 
 Overfull \vbox (14.45377pt too high) has occurred while \output is active []
 
  [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 186.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
  (./MOOD.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 186.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 186.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 186.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 189.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 189.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
  ) 
 Here is how much of TeX's memory you used:
- 28453 strings out of 493005
- 539301 string characters out of 6134597
- 654896 words of memory out of 5000000
- 32144 multiletter control sequences out of 15000+600000
+ 28454 strings out of 493005
+ 539308 string characters out of 6134597
+ 654923 words of memory out of 5000000
+ 32145 multiletter control sequences out of 15000+600000
  11566 words of font info for 72 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  57i,6n,67p,10431b,1611s stack positions out of 5000i,500n,10000p,200000b,80000s
